@@ -41,5 +41,25 @@ const handleDeleteProject = async (pId) => {
   }
 };
 
+return (
+  <>
+    <Container>
+      <Card fluid className="text-center mt-5">
+        <Card.Body>
+          <Card.Title>
+            <h1>Viewing <b>{userData.username}</b>'s saved Non-Profits</h1>
+            </Card.Title>
+              <Card.Text>
 
+              </Card.Text>
+          </Card.Body>
+          <Card.Footer className="text-left">
+            {userData.savedProjects?.length
+              ?`Viewing ${userData.savedProjects.length} saved ${userData.savedProjects.length === 1 ?"Non-Profit" : "Non-Profits"
+            }:`
+            : "You have no saved Non-Profits"}
+          </Card.Footer>
+      </Card>
+      </Container></>
+)
 };
