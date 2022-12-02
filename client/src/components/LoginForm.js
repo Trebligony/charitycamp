@@ -23,4 +23,34 @@ const LoginForm = () => {
         const { name, value } =event.target;
         setUserFormData({...userFormData, [name]: value });
     };
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+    
+        // check if form has everything (as per react-bootstrap docs)
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+    
+        try {
+          const { data } = await login({
+            variables: { ...userFormData },
+          });
+    
+          console.log(data);
+          Auth.login(data.login.token);
+        } catch (e) {
+          console.error(e);
+        }
+    
+        // clear form values
+        setUserFormData({
+          email: "",
+          password: "",
+        });
+      };
+
+
 }
