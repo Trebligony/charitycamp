@@ -22,4 +22,24 @@ const SavedProjects = () => {
   const paymentSubmit = () => {
     alert("Thank you. Your payment has been received.");
   };
-}
+// create function that accepts the project's mong _id value as param and deletes the project from the database
+const handleDeleteProject = async (pId) => {
+  const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+  if (!token) {
+    return false
+  }
+// eslint-disable-next-line
+  try {
+    const{data} = await removeProject({
+      variables: {pId},
+    });
+    // upon success, remove project's id from local storage
+    removeProjectId(pId);
+  } catch (err) {
+    console.error(err)
+  }
+};
+
+
+};
