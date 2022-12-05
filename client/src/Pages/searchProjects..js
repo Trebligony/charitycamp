@@ -135,3 +135,54 @@ const SearchProjects = () => {
             : "Search for a Non-Profit to begin"}</Card.Footer>
         </Card>
       </Container>
+
+      <Container>
+        {searchedProjects.map((project) => {
+          return (
+            <div class="card">
+              <div class="row ">
+                <div class="col-md-9 px-3">
+                  <div class="card-block px-6">
+                    <h4 class="card-title">{project.pTitle}</h4><hr />
+                    <h6 class="card-title">Funding Goal: <b>${project.pGoal}</b></h6>
+                    <h6 class="card-title">Organizer: <b>{project.pOrganizer}</b></h6><hr />
+                    <ReadMoreReact class="card-text"
+                      min={100}
+                      ideal={150}
+                      max={200}
+                      text={project.pDescription}
+                      readMoreText="READ MORE"
+                    /><hr />
+                    {Auth.loggedIn() && (
+                      <Button
+                        disabled={savedProjectIds?.some(
+                          (savedProjectId) => savedProjectId === project.pId
+                        )}
+                        className="mt-auto btn btn-primary"
+                        onClick={() => handleSaveProject(project.pId)}
+                      >
+                        {savedProjectIds?.some(
+                          (savedProjectId) => savedProjectId === project.pId
+                        )
+                          ? "This Non-Profit has already been saved"
+                          : "Save this Non-Profit"}
+                      </Button>
+                    )}
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  {project.pImage ? (
+                    <img class="promage d-block rounded" width="400" height="400" src={project.pImage} alt={`The cover for ${project.pTitle}`} />
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </Container>
+    </>
+  );
+};
+
+export default SearchProjects;
