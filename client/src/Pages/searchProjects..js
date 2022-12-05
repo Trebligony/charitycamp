@@ -102,3 +102,36 @@ const SearchProjects = () => {
       console.error(err);
     }
   };
+
+  return (
+    <>
+      <Container>
+        <Card fluid className="text-center mt-5">
+          <Card.Body>
+            <Card.Text>
+              <Form onSubmit={handleFormSubmit}>
+              <Row className="mt-5 mb-3">
+              <Col sm={1}></Col>
+              <Col sm={6}>
+                  <Form.Control 
+                    name="searchInput"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    type="text"
+                    size="lg"
+                    placeholder="Search by Cause, Country, Location, Theme etc."
+                  />
+                  </Col>
+                  <Col sm={3}>
+                <Button  className="text-center" type="submit" variant="success" size="lg">Search for Non-Profits</Button>
+                </Col>
+                <Col sm={1}></Col>
+                </Row>
+              </Form>
+            </Card.Text>
+          </Card.Body>
+          <Card.Footer className=" text-left"> {searchedProjects.length
+            ? `Viewing ${searchedProjects.length} results:`
+            : "Search for a Non-Profit to begin"}</Card.Footer>
+        </Card>
+      </Container>
