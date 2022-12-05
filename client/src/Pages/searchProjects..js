@@ -54,3 +54,51 @@ const SearchProjects = () => {
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
+
+      var sdata = await response.json();
+      //console.log(sdata.search.response.projects.project[0].image.imagelink[3].url);
+      //console.log(sdata.search.response.projects.project[0].goal);
+      //alert('DATA');
+      const searchData = sdata.search.response.projects.project;
+
+      const projectData = searchData.map((project) => ({
+        pId: project.id.toString(),
+        pTitle: project.title,
+        pOrganizer: project.organization.name,
+        pDescription: project.summary,
+        pGoal: project.goal.toString(),
+        pImage: project.image.imagelink[3].url || "",
+      }));
+
+      console.log(projectData);
+
+      setsearchedProjects(projectData);
+      setSearchInput("");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  // create function to handle saving a charity to our database
+  const handleSaveProject = async (pId) => {
+    // find the charity in `searchedProjects` state by the matching id
+    const projectToSave = searchedProjects.find((project) => project.pId === pId);
+
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      // eslint-disable-next-line
+      const { data } = await saveProject({
+        variables: { projectData: { ...projectToSave } },
+      });
+
+      setsavedProjectIds([...savedProjectIds, projectToSave.pId]);
+    } catch (err) {
+      console.error(err);
+    }
+  };
