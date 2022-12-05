@@ -26,3 +26,31 @@ const SearchProjects = () => {
   const [saveProject] = useMutation(SAVE_PROJECT);
 
   const my_api_key = '4b8fd6d5-0376-4ea8-ace6-0d6266e22182';
+
+  // set up useEffect hook to save `savedProjectIds` list to localStorage on component unmount
+  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  useEffect(() => {
+    return () => saveProjectIds(savedProjectIds);
+  });
+
+  // create method to search for books and set state on form submit
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    if (!searchInput) {
+      return false;
+    }
+
+    try {
+      var options = {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      }
+
+      const response = await fetch(`https://api.globalgiving.org/api/public/services/search/projects?api_key=${my_api_key}&q=${searchInput}`, options);
+      //alert(response.status);
+      if (!response.ok) {
+        throw new Error("something went wrong!");
+      }
