@@ -131,11 +131,8 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 
 
-<img src="./images/cc_pay_page.png">
+<img src="./images/cc_pay_page.jpg">
 
-
-
-<img src="./images/.png">
 
 
 
