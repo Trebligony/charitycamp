@@ -22,46 +22,52 @@ const SavedProjects = () => {
   const paymentSubmit = () => {
     alert("Thank you. Your payment has been received.");
   };
-// create function that accepts the project's mong _id value as param and deletes the project from the database
-const handleDeleteProject = async (pId) => {
-  const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-  if (!token) {
-    return false
-  }
-// eslint-disable-next-line
-  try {
-    const{data} = await removeProject({
-      variables: {pId},
-    });
-    // upon success, remove project's id from local storage
-    removeProjectId(pId);
-  } catch (err) {
-    console.error(err)
-  }
-};
+  // create function that accepts the project's mongo _id value as param and deletes the project from the database
+  const handleDeleteProject = async (pId) => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-return (
-  <>
-    <Container>
-      <Card fluid className="text-center mt-5">
-        <Card.Body>
+    if (!token) {
+      return false;
+    }
+
+    try {
+      // eslint-disable-next-line
+      const { data } = await removeProject({
+        variables: { pId },
+      });
+
+      // upon success, remove project's id from localStorage
+      removeProjectId(pId);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
+  return (
+    <>
+          <Container>
+        <Card fluid className="text-center mt-5">
+          <Card.Body>
           <Card.Title>
-            <h1>Viewing <b>{userData.username}</b>'s saved Non-Profits</h1>
-            </Card.Title>
-              <Card.Text>
-
-              </Card.Text>
+          <h1>Viewing <b>{userData.username}</b>'s saved Non-Profits</h1>
+          </Card.Title>
+            <Card.Text>
+           
+            </Card.Text>
           </Card.Body>
-          <Card.Footer className="text-left">
-            {userData.savedProjects?.length
-              ?`Viewing ${userData.savedProjects.length} saved ${userData.savedProjects.length === 1 ?"Non-Profit" : "Non-Profits"
+          <Card.Footer className=" text-left">
+          {userData.savedProjects?.length
+            ? `Viewing ${userData.savedProjects.length} saved ${userData.savedProjects.length === 1 ? "Non-Profit" : "Non-Profits"
             }:`
             : "You have no saved Non-Profits"}
           </Card.Footer>
-      </Card>
+        </Card>
       </Container>
-            
       <Container>
         {userData.savedProjects?.map((project) => {
           return (
@@ -126,7 +132,7 @@ return (
           );
         })}
       </Container>
-      </>
+    </>
   );
 };
 
