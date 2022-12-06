@@ -119,7 +119,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 
 
-<img src=".images/cc_register.png">
+<img src="./images/cc_register.png">
 
 
 
@@ -127,7 +127,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 
 
-<img src=".images/Charity Camp _ Support Your Non-Profits.png">
+<img src="./images/Charity Camp _ Support Your Non-Profits.png">
 
 
 
@@ -135,7 +135,7 @@ THEN I am logged out of the site and presented with a menu with the options Sear
 
 
 
-<img src=".images/.png">
+<img src="./images/.png">
 
 
 
