@@ -11,21 +11,25 @@ const AppNavbar = () => {
 
   return (
     <>
-      <Navbar fluid bg="light" variant="light" expand="lg"  sticky="top" >
-        <Container >
+      <Navbar  bg="light" variant="light" expand="lg"  sticky="top" >
+        <Container fluid >
           <Navbar.Brand className="mt-2" as={Link} to="/">
-            <h2>Charity Camp - Donate To Non-Profits!</h2>
+            <img src="/assets/logo192.png" width="100" height="100" alt="Charity Camp - Donate To Non-Profits!"></img>
+          </Navbar.Brand>
+          <Navbar.Brand className="mt-2" as={Link} to="/">
+            <h4>Charity Camp - Donate To Non-Profits!</h4>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar" />
           <Navbar.Collapse id="navbar">
             <Nav className="ml-auto">
-              <Nav.Link as={Link} to="/"><Button variant="outline-secondary">Search For Non-Profits</Button>
-              </Nav.Link>
+              
+              <Nav.Link as={Link} to="/"><Button variant="outline-secondary">Search for n-Profits</Button></Nav.Link>
+              <Nav.Link as={Link} to="/recommend"><Button variant="outline-secondary">Top-10 Recommended n-Profits</Button></Nav.Link>
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
                   <Nav.Link as={Link} to="/saved">
-                  <Button variant="outline-secondary">Saved Non-Profits</Button>
+                  <Button variant="outline-secondary">Saved n-Profits</Button>
                   </Nav.Link>
                   <Nav.Link onClick={Auth.logout}> <Button variant="success">Logout</Button></Nav.Link>
                 </>
