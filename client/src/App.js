@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchProjects from "./pages/SearchProjects";
 import SavedProjects from "./pages/SavedProjects";
 import RecomendProjects from "./pages/RecomendProjects";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { ApolloProvider } from "@apollo/react-hooks";
 import ApolloClient from "apollo-boost";
